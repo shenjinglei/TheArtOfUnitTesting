@@ -8,9 +8,10 @@ namespace Chapter3.Test
             FakeExtensionManager myFakeManager = new FakeExtensionManager();
             myFakeManager.WillBeValid = true;
 
-            LogAnalyzer log = new LogAnalyzer(myFakeManager);
+            ExtensionManagerFactory.SetManager(myFakeManager);
+            LogAnalyzer log = new LogAnalyzer();
 
-            bool result = log.IsValidLogFileName("short.ext");
+            bool result = log.IsValidLogFileName("short2.ext");
 
             Assert.True(result);
         }
@@ -20,7 +21,8 @@ namespace Chapter3.Test
         {
             FakeExtensionManager myFakeManager = new FakeExtensionManager();
             myFakeManager.WillThrow = new Exception("This is fake.");
-            LogAnalyzer log = new LogAnalyzer(myFakeManager);
+            ExtensionManagerFactory.SetManager(myFakeManager);
+            LogAnalyzer log = new LogAnalyzer();
             bool result = log.IsValidLogFileName("anything.anyextension");
 
             Assert.False(result);
