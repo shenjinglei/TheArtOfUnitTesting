@@ -10,7 +10,14 @@
 
         public bool IsValidLogFileName(string fileName)
         {
-            return manager.IsValid(fileName);
+            try
+            {
+                return manager.IsValid(fileName);
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 
