@@ -12,8 +12,8 @@
         {
             try
             {
-                return manager.IsValid(fileName) 
-                    && Path.GetFileNameWithoutExtension(fileName).Length>5;
+                return manager.IsValid(fileName)
+                    && Path.GetFileNameWithoutExtension(fileName).Length > 5;
             }
             catch
             {
@@ -38,16 +38,5 @@
         }
     }
 
-    internal class FileExtensionManager : IExtensionManager
-    {
-        public bool IsValid(string fileName)
-        {
-            return !string.IsNullOrEmpty(fileName);
-        }
-    }
 
-    public interface IExtensionManager
-    {
-        bool IsValid(string fileName);
-    }
 }
