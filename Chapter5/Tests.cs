@@ -21,9 +21,9 @@ namespace Chapter5
         {
             IFileNameRules fakeRules = Substitute.For<IFileNameRules>();
 
-            fakeRules.IsValidLogFileName("strict.txt").Returns(true);
+            fakeRules.IsValidLogFileName(Arg.Any<String>()).Returns(true);
 
-            Assert.IsTrue(fakeRules.IsValidLogFileName("strict.txt"));
+            Assert.IsTrue(fakeRules.IsValidLogFileName("anything.txt"));
         }
     }
 }
