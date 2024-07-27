@@ -25,5 +25,16 @@ namespace Chapter5
 
             Assert.IsTrue(fakeRules.IsValidLogFileName("anything.txt"));
         }
+
+        [Test]
+        public void Returns_ArgAny_Throws()
+        {
+            IFileNameRules fakeRules = Substitute.For<IFileNameRules>();
+
+            fakeRules.When(x => x.IsValidLogFileName(Arg.Any<string>()))
+                .Do(context => { throw new Exception("fake exception"); });
+
+            Assert.Throws<Exception>(() => fakeRules.IsValidLogFileName("anything"));
+        }
     }
 }
