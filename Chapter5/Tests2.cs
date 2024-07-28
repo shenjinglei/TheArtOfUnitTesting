@@ -42,5 +42,21 @@ namespace Chapter5
                 }
             }
         }
+
+        [Test]
+        public void Analyze_LoggerThrows_CallsWebService2()
+        {
+            var mockWebService = Substitute.For<IWebService>();
+            var stubLogger = Substitute.For<ILogger>();
+
+            stubLogger.When(logger => logger.LogError(Arg.Any<string>()))
+                .Do(info => { throw new Exception("fake exception"); });
+
+            var analyzer = new LogAnalyzer2(stubLogger, mockWebService);
+            analyzer.MinNameLength = 8;
+            analyzer.Analyze("abc.txt");
+
+            mockWebService.Received().Write(Arg.Is<string>(s => s.Contains("fake exception")));
+        }
     }
 }
